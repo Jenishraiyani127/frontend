@@ -1,8 +1,10 @@
 import React from 'react';
-import { useCart } from '../CartContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { incrementQuantity, decrementQuantity } from '../redux/slices/cartslice';
 
 const CartPage = () => {
-  const { cartItems, updateQuantity } = useCart();
+  const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -14,16 +16,16 @@ const CartPage = () => {
       <div className="container cart-page">
         <h4 className="fw-bold text-center mb-4">My Cart</h4>
 
-        <div className="d-none d-md-flex fw-bold  pb-2 mb-3">
+        <div className="d-none d-md-flex fw-bold pb-2 mb-3">
           <div className="col-md-6">Name</div>
           <div className="col-md-3">Price</div>
           <div className="col-md-3">Quantity</div>
         </div>
 
-        {cartItems.map((item, index) => (
+        {cartItems.map((item) => (
           <div
-            className="row align-items-start align-items-md-center mb-4  p-3"
-            key={index}
+            className="row align-items-start align-items-md-center mb-4 p-3"
+            key={item.id}
           >
             <div className="col-12 col-md-6 d-flex flex-column flex-md-row align-items-start">
               <div className="me-md-3 mb-2 mb-md-0">
@@ -53,14 +55,14 @@ const CartPage = () => {
               <div className="d-flex align-items-center justify-content-md-start justify-content-end gap-2">
                 <button
                   className="btn btn-sm btn-dark"
-                  onClick={() => updateQuantity(index, -1)}
+                  onClick={() => dispatch(decrementQuantity(item.id))}
                 >
                   −
                 </button>
                 <span>{item.quantity}</span>
                 <button
                   className="btn btn-sm btn-dark"
-                  onClick={() => updateQuantity(index, 1)}
+                  onClick={() => dispatch(incrementQuantity(item.id))}
                 >
                   +
                 </button>

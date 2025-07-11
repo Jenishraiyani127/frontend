@@ -1,7 +1,7 @@
 // src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { CartPageRoute, HomeRoute, LoginRoute, ProductListRoute } from "./routes/routes";
+import { CartPageRoute, HomeRoute, LoginRoute, ProductListRoute, RegisterRoute } from "./routes/routes";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
 import { ToastContainer } from 'react-toastify';

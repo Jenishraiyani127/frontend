@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../CartContext';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/slices/cartslice';
 
 const ProductListing = () => {
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const dispatch = useDispatch();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +36,7 @@ const ProductListing = () => {
         <div className="row">
           {products.map((product) => (
             <div className="col-sm-6 col-md-3 mb-4" key={product.id}>
-              <div className="card  border-0 ">
+              <div className="card border-0">
                 <div className="product-img" style={{ height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <img
                     src={product.thumbnail}
@@ -47,7 +48,7 @@ const ProductListing = () => {
                   <h6 className="fw-bold">{product.title}</h6>
                   <p className="small text-muted">{product.description}</p>
                   <p className="fw-bold">₹ {product.price}</p>
-                  <button className="btn btn-dark w-100" onClick={() => addToCart(product)}>
+                  <button className="btn btn-dark w-100" onClick={() => dispatch(addToCart(product))}>
                     Add To Cart
                   </button>
                 </div>

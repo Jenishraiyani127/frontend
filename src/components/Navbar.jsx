@@ -19,6 +19,7 @@ const Navbar = () => {
     navigate('/');
   };
 
+
   const toggleMenu = (menu) => {
     setExpandedMenus((prev) => ({
       ...prev,
@@ -42,8 +43,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-dark nav-padding" style={{ backgroundColor: '#333' }}>
         <div className="container-fluid d-flex justify-content-between align-items-center">
-          <Link className="navbar-brand text-white fw-bold" to="/">Hashtechy</Link>
-
+          <Link className="navbar-brand text-white fw-bold" to="/">My page</Link>
           {isLoggedIn && (
             <div className="d-flex align-items-center gap-3">
               <button className="btn text-white fs-5" onClick={handleLogout}>
